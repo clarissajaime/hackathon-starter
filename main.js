@@ -13,14 +13,39 @@ const rl = readline.createInterface({
 
 // Your code right here
 
+const countRamps = (numbR) => {
+  let theTotal = 0;
 
-// TO-DO - UPDATE TO USE YOUR FUNCTION
-// const getPrompt = () => {
-//   rl.question('word ', (answer) => {
-//     console.log( pigLatin(answer) );
-//     getPrompt();
-//   });
-// }
+  for (let i = 1; i <= numbR; i++) {
+    let strNumber = i.toString();
+    let isRamp = true;
+
+    for (let j = 0; j < strNumber.length - 1; j++) {
+      if (parseInt(strNumber[j]) > parseInt(strNumber[j + 1])) {
+        isRamp = false;
+        break; 
+      }
+    }
+
+    if (isRamp) {
+      theTotal += 1;
+    }
+  }
+
+  console.log(theTotal + " total ramp numbers are less than " + numbR);
+
+  return theTotal + " total ramp numbers are less than " + numbR;
+
+
+};
+
+const getPrompt = () =>  {
+  rl.question('input number: ', (numbR) => {
+    countRamps(numbR)
+    getPrompt();
+  });
+}
+
 
 // Unit Tests
 // to use them run the command: npm test main.js
@@ -29,10 +54,9 @@ const rl = readline.createInterface({
 // TO-DO - ADD TESTS
 if (typeof describe === 'function') {
 
-  describe("#yourFunctionName)", () => {
-    it("test description", () => {
-      assert.equal(yourFunctionName("test input"), "expected return value");
-      assert.equal(yourFunctionName("test input"), "expected return value");
+  describe('#countRamps()', () => {
+    it('should display number of non-decreasing sequences less than the input number', () => {
+      assert.equal(countRamps(123), "65 total ramp numbers are less than 123");
     });
   });
 } else {
